@@ -80,7 +80,7 @@ export default (props: any) => {
         </p>
         {
           !props.hasPaid && !props.isGarage && (
-            <form action="https://sandbox.payfast.co.za/eng/process" onSubmit={sign} method="post">
+            <form action="https://payfast.co.za/eng/process" onSubmit={sign} method="post">
               <input type="submit" id="submit-btn" style={{ border: 'none', background: 'transparent', padding: '0rem' }} value="Pay now" />
             </form>
             // <span style={{ marginLeft: '2rem' }}><Link to={`/u/requests/pay?request=${props._id}`}>Pay now</Link></span>
