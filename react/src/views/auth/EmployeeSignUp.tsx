@@ -31,6 +31,7 @@ export default () => {
     let body: any = {
       name: getValueById('full-name'),
       email: getValueById('email-address'),
+      phone: getValueById('phone-number'),
       password: getValueById('password'),
       passwordAgain: getValueById('password-again'),
       garageName: getValueById('garage-name'),
@@ -209,7 +210,7 @@ export default () => {
   return (
     <div className="auth flex">
       <main className="auth__main">
-        <form className="auth__main__form auth__main__form--uu" style={{ width: '38rem'}} onSubmit={signUp}>
+        <form className="auth__main__form auth__main__form--uu" style={{ width: '38rem', marginTop: '5%' }} onSubmit={signUp}>
           <div className="auth__main__form__title">
             <h4>Administrator on-boarding</h4>
             <p>Administrator &amp; Garage details</p>
@@ -250,6 +251,10 @@ export default () => {
 
           <div className="input">
             <input type="email" id="email-address" placeholder="Email address" />
+          </div>
+
+          <div className="input">
+            <input type="text" id="phone-number" placeholder="Phone number" />
           </div>
 
           <div className="flex" style={{ gap: '1rem' }}>

@@ -6,7 +6,10 @@ export default class GarageAdmin extends Model {
   constructor(mongoose, QueryBuilder) {
     const schema = new mongoose.Schema({
       name: { type: String },
+      firstName: { type: String },
+      lastName: { type: String },
       email: { type: String, required: true },
+      phone: { type: String, required: true },
       garage: { type: Types.ObjectId, ref: "Garage" },
       isSuper: { type: Boolean, default: false },
       password: { type: String },

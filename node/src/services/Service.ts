@@ -7,6 +7,7 @@ export async function addService(body, user) {
     await Service.add({
       name: body.name,
       garage: user.garage,
+      isPriceUserDefined: body.isPriceUserDefined,
       price: body.price,
     });
 
@@ -67,7 +68,8 @@ export async function searchGaragesByServices(body: any): Promise<IResponse> {
       if (garage) {
         garage.services.push([
           service.name,
-          service.price
+          service.price,
+          service.isPriceUserDefined
         ])
       }
 

@@ -10,6 +10,17 @@ const getGarages = async (): Promise<any> => {
   return res.garages;
 }
 
+export async function downloadImage(filename: string) {
+  const url = await (await fetch(`${BASEURL()}/assets/uploads/documents/${filename}`)).text()
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'Registration document'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
 export default () => {
   const [garages, setGarages] = useState([]) as any;
 
@@ -33,17 +44,6 @@ export default () => {
     })
 
     setGarages(await getGarages());
-  }
-
-  async function downloadImage(filename: string) {
-    const url = await (await fetch(`${BASEURL()}/assets/uploads/documents/${filename}`)).text()
-
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'Registration document'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
   }
 
   return (
@@ -78,7 +78,7 @@ export default () => {
                   <td className="flex" style={{ justifyContent: 'flex-end' }}>
                     <span style={{ marginRight: '1rem' }}>
                       {!garage.isRegistrationDocumentPhoto ?
-                        (<a href={`/assets/uploads/documents/${garage.registrationDocument}`} download={true}>Download Document</a>) :
+                        (<a href={`${BASEURL()}/assets/uploads/documents/${garage.registrationDocument}`} download={true}>Download Document</a>) :
                         (<p onClick={() => downloadImage(garage.registrationDocument)}>Download document</p>)
                       }
                     </span>

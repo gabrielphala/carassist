@@ -51,11 +51,15 @@ export default () => {
     })()
   }, [])
 
-  const sendRequest = async (garageId: string, service: string, price: string) => {
+  const sendRequest = async (e: any, garageId: string, service: string, price: string) => {
+    let parent = e.target.parentElement;
+
+    let input = parent.getElementsByClassName('price-input')[0];
+
     await postWithAuth('/requests/add', {
       garageId,
       service,
-      price,
+      price: price || input.value,
       location
 		})
 

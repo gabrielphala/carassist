@@ -25,8 +25,11 @@ async function createUser(body: any, req: any, res: any): Promise<IResponse> {
     if (!req.files[0]) throw 'Please select ID document or take photo';
 
     const newUser = await User.add({
-      name: body.name,
+      name: `${body.firstName} ${body.lastName}`,
+      firstName: body.firstName,
+      lastName: body.lastName,
       email: body.email,
+      phone: body.phone,
       idDocument: req.files[0]?.filename,
       password: await hasher.hash(body.password),
     });
@@ -35,6 +38,8 @@ async function createUser(body: any, req: any, res: any): Promise<IResponse> {
 
     req.successful = true;
   } catch (error) {
+    console.log(error);
+    
     throw error;
   }
   return this;
@@ -71,4 +76,39 @@ async function getUserSession(_, user: any): Promise<IResponse> {
   return this;
 }
 
-export default { getDrivers, getUserSession, createUser, authUser };
+async function acceptDriver(body: any): Promise<IResponse> {
+  await User.updateOne(
+    { _id: body.driverId },
+    { 
+      isVerified: true
+    }
+  )
+
+  this.successful = true;
+  return this;
+}
+
+async function declineDriver(body: any): Promise<IResponse> {
+  await User.updateOne(
+    { _id: body.driverId },
+    { 
+      isDeclined: true
+    }
+  )
+
+  this.successful = true;
+  return this;
+}
+
+async function getAllByUnverified(body: any): Promise<IResponse> {
+  try {
+    const drivers = await User.getAllByUnverified();
+
+    this.drivers = drivers;
+  } catch (error) {
+    throw error;
+  }
+  return this;
+}
+
+export default { getDrivers, getAllByUnverified, getUserSession, acceptDriver, declineDriver, createUser, authUser };

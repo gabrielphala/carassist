@@ -1,10 +1,17 @@
 import { IResponse } from "../interfaces";
 import Chat from "../models/Chat";
+import User from "../models/User";
+import { sendSMS } from "./Sms";
 
 export async function send(body, user) {
   try {
     let driver = user.garage ? body.receiverId: user._id;
     let admin = !user.garage ? body.receiverId: user._id;
+
+    const senderUser = await User.getById(body.user._id);
+    const receiverUser = await User.getById(body.receiverId);
+
+    if (receiverUser.phone) sendSMS(receiverUser.phone, `You have a message from mechanic - ${senderUser.name}`)
 
     await Chat.add({
       driver,

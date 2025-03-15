@@ -7,6 +7,7 @@ export default class Garage extends Model {
     const schema = new mongoose.Schema({
       name: { type: String },
       type: { type: String },
+      phone: { type: String },
       registrationNumber: { type: String },
       registrationDocument: { type: String },
       isRegistrationDocumentPhoto: { type: Boolean, default: false },

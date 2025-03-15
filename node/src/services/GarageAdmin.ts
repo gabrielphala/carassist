@@ -13,13 +13,15 @@ async function createGarageAdmin(body: any, req: any, res: any) {
   try {
     if (!req.files[0]) throw 'Please select company registration document or take photo';
 
-    const { name, email, password, passwordAgain, garageName, type, location, locationName, registrationNumber } = body;
+    const { firstName, lastName, email, password, phone, passwordAgain, garageName, type, location, locationName, registrationNumber } = body;
 
     v.validate({
       'Garage name': { value: garageName, min: 3, max: 50 },
       'Registration number': { value: registrationNumber, min: 14, max: 14 },
-      'Full name': { value: name, min: 3, max: 50 },
+      'First name': { value: firstName, min: 3, max: 50 },
+      'Last name': { value: lastName, min: 3, max: 50 },
       'Email address': { value: email, min: 3, max: 50 },
+      'Phone number': { value: phone, min: 10, max: 15 },
       'Password': { value: password, min: 8, max: 50 },
       'Password again': { value: passwordAgain, is: ['Password', 'Passwords don\'t match'] }
     });
@@ -40,6 +42,7 @@ async function createGarageAdmin(body: any, req: any, res: any) {
       registrationDocument: req.files[0]?.filename,
       isRegistrationDocumentPhoto: req.files[0].mimetype == 'text/plain',
       locationName,
+      phone,
       location: {
         lat: parseFloat(loc[0]),
         lng: parseFloat(loc[1]),
@@ -48,8 +51,9 @@ async function createGarageAdmin(body: any, req: any, res: any) {
     });
 
     const admin = await GarageAdmin.add({
-      name,
+      name: `${firstName} ${lastName}`,
       email,
+      phone,
       garage: garage._id,
       password: await hasher.hash(password),
     });

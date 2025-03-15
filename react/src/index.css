@@ -242,6 +242,39 @@ textarea:focus {
     0 0 0 0.2em #9ec5e669;
 }
 
+.input-toggle {
+  position: relative;
+  width: 4rem;
+  height: 1.6rem;
+  background-color: #e4e4e4;
+  display: inline-block;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .1s;
+}
+
+.input-toggle::after {
+  position: absolute;
+  content: "";
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.1rem;
+  margin: 0 .4rem;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all .3s;
+}
+
+.input-toggle__input:checked + .input-toggle {
+  background-color: #8396ff;
+}
+
+.input-toggle__input:checked+.input-toggle::after {
+  margin-left: 60%;
+}
+
 textarea {
   overflow: auto;
 }

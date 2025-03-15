@@ -66,6 +66,12 @@ export default (app: any) => {
   );
 
   app.post(
+    "/users/get/unverified",
+    BaseController.wrapWithUser(userServices.getAllByUnverified)
+  );
+
+
+  app.post(
     "/g/sign-up",
     (req, res, next) => {
       anyFiles("./public/assets/uploads/documents", "pdf")(
@@ -91,6 +97,9 @@ export default (app: any) => {
       return this;
     })
   );
+
+  app.post("/drivers/accept", BaseController.wrap(userServices.acceptDriver));
+  app.post("/drivers/decline", BaseController.wrap(userServices.declineDriver));
 
   app.post("/sign-out", BaseController.signOut);
 };

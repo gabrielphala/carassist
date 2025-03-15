@@ -10,6 +10,7 @@ export default class Service extends Model {
       garage: { type: Types.ObjectId, ref: "Garage" },
       name: { type: String },
       price: { type: Number },
+      isPriceUserDefined: { type: Boolean, default: false },
       isDeleted: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
     });

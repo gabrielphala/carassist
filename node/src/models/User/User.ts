@@ -6,7 +6,10 @@ export default class User extends Model {
   constructor(mongoose, QueryBuilder) {
     const schema = new mongoose.Schema({
       name: { type: String },
+      firstName: { type: String },
+      lastName: { type: String },
       email: { type: String, required: true },
+      phone: { type: String, required: true },
       idDocument: { type: String },
       password: { type: String },
       isDeleted: { type: Boolean, default: false },
@@ -14,6 +17,12 @@ export default class User extends Model {
     });
 
     super(mongoose, "User", QueryBuilder, schema);
+  }
+
+  getById(_id: string|Types.ObjectId) {
+    return this.model.findOne({
+      condition: { _id },
+    });
   }
 
   getByEmail(email: string) {
@@ -25,6 +34,12 @@ export default class User extends Model {
   getDrivers() {
     return this.model.find({
       condition: { isDeleted: false },
+    });
+  }
+
+  getAllByUnverified() {
+    return this.model.find({
+      condition: { isDeclined: false },
     });
   }
 }

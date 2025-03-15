@@ -1,13 +1,39 @@
 .checkout-msg{
   display: flex;
-  flex-direction: column;
   justify-content: center;
   margin: 18rem auto 0;
-  width: 50rem;
+}
+
+.checkout-msg img{
+  width: 20rem;
+  margin-right: 6rem;
+}
+
+.checkout-msg__details h1{
+  font-size: 4rem;
 }
 
 @media only screen and (max-width: 426px) {
   .btn-container{
     padding: 0 3rem !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .checkout-msg {
+    flex-direction: column;
+  }
+
+  .checkout-msg__details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .checkout-msg__details h1 {
+    font-size: 200%;
   }
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { closeModal, openModal } from "../../helpers/modals";
 import { postWithAuth } from "../../helpers/http";
-import { getValueById } from "../../helpers/dom";
+import { getElementById, getValueById } from "../../helpers/dom";
 import GarageManager from "../../components/info/GarageManager";
 import ServiceCard from "../../components/service-card/ServiceCard";
 
@@ -25,6 +25,7 @@ export default () => {
 
     const res = await postWithAuth('/services/add', {
       name: getValueById('service-name'),
+      isPriceUserDefined: (getElementById('service-is-user-price') as HTMLInputElement).checked,
       price: getValueById('service-price')
     })
 
@@ -76,6 +77,13 @@ function ServiceModal (props: any) {
 
             <div className="input margin--top-1">
               <input type="number" id="service-price" placeholder="Service price" />
+            </div>
+
+            <div className="input margin--top-1 flex flex--a-center">
+              <input type="checkbox" id="service-is-user-price" className="input-toggle__input" hidden />
+              <label htmlFor="service-is-user-price" className="input-toggle margin--right-1"></label>
+              <span>Is user defined price? (e.g. for Fuel)</span>
+
             </div>
           </div>
         </div>

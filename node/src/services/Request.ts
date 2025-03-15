@@ -2,10 +2,12 @@ import Request from "../models/Request";
 import Payment from "../models/Payment";
 import Garage from "../models/Garage";
 import { getDistance } from "../helpers/Distance";
+import axios from "axios";
+import { sendSMS } from "./Sms";
 
 export async function add(body, user) {
   try {
-    const { garageId, service, location, price } = body;
+    const { garageId, service, location, price, isPriceUserDefined } = body;
 
     const userPosArr = location.split(',');
 
@@ -14,11 +16,17 @@ export async function add(body, user) {
       requester: user._id,
       garage: garageId,
       price,
+      isPriceUserDefined,
       location: {
         lat: parseFloat(userPosArr[0]),
         lng: parseFloat(userPosArr[1])
       }
     });
+
+    let _garage = await Garage.getById(garageId);
+
+    if (_garage.phone) sendSMS(_garage.phone, `You have recieved a request for ${service} at R${price}, sign in to see more www.carassisthub.info/g/sign-in`)
+
   } catch (e) {
     throw e;
   }
@@ -47,8 +55,6 @@ export async function updatePay(body) {
   } catch (e) {
     throw e;
   }
-
-  return this;
 }
 
 export async function accept(body, user) {
@@ -74,6 +80,8 @@ export async function accept(body, user) {
         lng: parseFloat(userPosArr[1])
       }
     })
+
+    if (user.phone) sendSMS(user.phone, `Your request to garage - ${garage.name} has been accepted`)
   } catch (e) {
     throw e;
   }

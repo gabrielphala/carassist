@@ -24,8 +24,10 @@ export default () => {
 		(e as PointerEvent).preventDefault();
 
     const body: any = {
-      name: getValueById('name'),
+      firstName: getValueById('first-name'),
+      lastName: getValueById('last-name'),
       email: getValueById('email'),
+      phone: getValueById('phone-number'),
       password: getValueById('password'),
       passwordAgain: getValueById('password-again'),
     }
@@ -184,12 +186,22 @@ export default () => {
             <p><b>Sorry, </b><span className="error-msg"></span></p>
           </div>
 
-          <div className="input">
-            <input type="text" id="name" placeholder="Full name"  />
+          <div className="twin-inputs flex flex--j-space-between">
+            <div className="input" style={{ flex: '0 0 49%' }}>
+              <input type="text" id="first-name" placeholder="First name" />
+            </div>
+
+            <div className="input" style={{ flex: '0 0 49%' }}>
+              <input type="text" id="last-name" placeholder="Last name" />
+            </div>
           </div>
           
-          <div className="input">
+          <div className="input margin--top-1">
             <input type="email" id="email" placeholder="Email address."  />
+          </div>
+
+          <div className="input">
+            <input type="text" id="phone-number" placeholder="Phone number" />
           </div>
 
           <div className="input">
