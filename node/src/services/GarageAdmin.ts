@@ -18,8 +18,7 @@ async function createGarageAdmin(body: any, req: any, res: any) {
     v.validate({
       'Garage name': { value: garageName, min: 3, max: 50 },
       'Registration number': { value: registrationNumber, min: 14, max: 14 },
-      'First name': { value: name, min: 3, max: 50 },
-      'Last name': { value: lastName, min: 3, max: 50 },
+      'Name': { value: name, min: 3, max: 50 },
       'Email address': { value: email, min: 3, max: 50 },
       'Phone number': { value: phone, min: 10, max: 15 },
       'Password': { value: password, min: 8, max: 50 },
