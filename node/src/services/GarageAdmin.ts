@@ -13,12 +13,12 @@ async function createGarageAdmin(body: any, req: any, res: any) {
   try {
     if (!req.files[0]) throw 'Please select company registration document or take photo';
 
-    const { firstName, lastName, email, password, phone, passwordAgain, garageName, type, location, locationName, registrationNumber } = body;
+    const { name, lastName, email, password, phone, passwordAgain, garageName, type, location, locationName, registrationNumber } = body;
 
     v.validate({
       'Garage name': { value: garageName, min: 3, max: 50 },
       'Registration number': { value: registrationNumber, min: 14, max: 14 },
-      'First name': { value: firstName, min: 3, max: 50 },
+      'First name': { value: name, min: 3, max: 50 },
       'Last name': { value: lastName, min: 3, max: 50 },
       'Email address': { value: email, min: 3, max: 50 },
       'Phone number': { value: phone, min: 10, max: 15 },
@@ -51,7 +51,7 @@ async function createGarageAdmin(body: any, req: any, res: any) {
     });
 
     const admin = await GarageAdmin.add({
-      name: `${firstName} ${lastName}`,
+      name: `${name} ${lastName}`,
       email,
       phone,
       garage: garage._id,
