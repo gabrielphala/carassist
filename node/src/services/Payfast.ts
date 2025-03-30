@@ -2,9 +2,9 @@ import hasher from "../helpers/Hasher";
 import { urls } from "../globals";
 import Payment from "../models/Payment";
 import User from "../models/User";
+import { log } from "console";
 
 let today = new Date();
-
 export async function sign (body, user) {
   try {
     this.merchant_id =  ['development', 'staging'].includes(process.env.NODE_ENV) ? process.env.DEV_MERCH_ID : process.env.MERCH_ID;
@@ -22,6 +22,10 @@ export async function sign (body, user) {
     this.m_payment_id = payment._id;
     this.amount = body.price
     this.item_name = body.item_name;
+
+    console.log('ID', this.merchant_id);
+    console.log('KEY', this.merchant_key);
+    
 
     this.signature = hasher.signObject(new Map([
       ['merchant_id', this.merchant_id], // ,
