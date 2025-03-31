@@ -53,7 +53,10 @@ export async function getAll() {
 
 export async function searchGaragesByServices(body: any): Promise<IResponse> {
   try {
-    const { query, location } = body;
+    let { query, location } = body;
+
+    location = location ? location : '-26.2708,28.1123';
+    
     const garages: Map<string, any> = new Map();
 
     const services = await Service.getServicesByName(query);

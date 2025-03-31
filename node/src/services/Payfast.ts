@@ -2,7 +2,6 @@ import hasher from "../helpers/Hasher";
 import { urls } from "../globals";
 import Payment from "../models/Payment";
 import User from "../models/User";
-import { log } from "console";
 
 let today = new Date();
 export async function sign (body, user) {

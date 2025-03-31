@@ -5,6 +5,7 @@ import { maps, initMap } from "../../helpers/map"
 import UserManager from "../../components/info/UserManager";
 import RequetModal from "./RequetModal";
 import RequestCard from "../../components/request-card/RequestCard";
+import Notification, { showNotification } from "../../components/notification/Notification";
 
 const getRequests = async (): Promise<any> => {
   const res = await postWithAuth('/requests/get/by/user', {})
@@ -29,6 +30,8 @@ export default () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(setUserLocation, (error: any) => {
         console.log(error)
+
+        showNotification(error.message + ', please ensure location is turned on and allowed')
       });
 
       return;
@@ -174,6 +177,7 @@ export default () => {
       </div>
 
       <RequetModal garageId={garageId} garageName={garageName} services={services} sendRequest={sendRequest}/>
+      <Notification/>
     </UserManager>
   )
 }
