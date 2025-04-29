@@ -46,14 +46,15 @@ export default class Request extends Model {
 
   getRequestsByEmployee(id: string | Types.ObjectId) {
     return this.model.find({
-      condition: { employee: id }
+      condition: { employee: id },
+      populate: [["requester", "name"], ["garage", "name"], ['employee', 'name']],
     });
   }
 
   getRequestsByUser(id: string | Types.ObjectId) {
     return this.model.find({
       condition: { requester: id },
-      populate: [["garage", "name"], ['employee', 'name']],
+      populate: [["requester", "name"], ["garage", "name"], ['employee', 'name']],
     });
   }
 

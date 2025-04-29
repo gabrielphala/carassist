@@ -1,0 +1,16 @@
+.chats.info__pad .flex{
+  gap: 2rem;
+}
+
+.info__pad__chats{
+  flex: 0 0 30rem;
+  border: 1px solid #eee;
+  padding: 1rem;
+}
+
+.info__pad__chats__item{
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  cursor: pointer;
+}

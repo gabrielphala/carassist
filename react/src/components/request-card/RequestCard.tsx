@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { formatTime } from "../../helpers/date"
 import { cutstr } from "../../helpers/str";
 import { getUserBySession, postWithAuth } from "../../helpers/http";
@@ -7,6 +7,8 @@ import "./request-card.css"
 
 export default (props: any) => {
   const [user, setUser] = useState<any>(null);
+
+  const nav = useNavigate();
 
   let start = props.isGarage ? props.employeeLocation : props.location;
   let end = !props.isGarage ? props.employeeLocation : props.location;
@@ -56,6 +58,16 @@ export default (props: any) => {
     e.target.submit()
   }
 
+  const createChatAndRedirect = async (employeeId: string, userId: string, isGarage: boolean) => {
+    const res = await postWithAuth('/chat/create', {
+      employeeId,
+      userId,
+      isGarage
+    });
+
+    nav(`/${isGarage ? 'g' : 'u'}/chat?c=${res.chatId}`)
+  }
+
   return (
     <div className="request-card">
       <div className="flex" style={{ padding: "1rem 1rem .5rem" }}>
@@ -66,7 +78,7 @@ export default (props: any) => {
         </div>
         <div className="request-card__details">
           <p><b>{props.service}</b></p>
-          <p>{props.isGarage ? props?.requester.name : props?.garage.name}</p>
+          <p>{props.isGarage ? props?.requester?.name : props?.garage.name}</p>
           <p>{formatTime(new Date(props.createdAt))}</p>
           {(props.employee && <p>Assigned to {cutstr(props.employee.name)}</p>) || <p>Waiting for employee</p>}
         </div>
@@ -90,7 +102,7 @@ export default (props: any) => {
         <p><span onClick={() => props.calcRoute(start, end)}>Track</span></p>
         {
           props.employee ?
-            <p><Link to={`/${props.isGarage ? 'g' : 'u'}/chat?r=${props.isGarage ? props.requester._id : props.employee._id}&a=${props._id}`}>Chat</Link></p> :
+            <p onClick={() => createChatAndRedirect(props.employee._id, props.requester._id, props.isGarage)}>Chat</p> :
             <></> 
         }
         {

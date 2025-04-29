@@ -54,6 +54,9 @@ export default () => {
     })()
   }, [])
 
+  console.log(requests);
+  
+
   const sendRequest = async (e: any, garageId: string, service: string, price: string) => {
     let parent = e.target.parentElement;
 

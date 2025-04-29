@@ -5,11 +5,8 @@ import { Types } from "mongoose";
 export default class Chat extends Model {
   constructor(mongoose, QueryBuilder) {
     const schema = new mongoose.Schema({
-      driver: { type: Types.ObjectId },
-      admin: { type: Types.ObjectId },
-      request: { type: Types.ObjectId },
-      message: { type: String, required: true },
-      sender: { type: String, required: true },
+      employeeId: { type: Types.ObjectId, ref: 'GarageAdmin' },
+      userId: { type: Types.ObjectId, ref: 'User' },
       isDeleted: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
     });
@@ -17,15 +14,30 @@ export default class Chat extends Model {
     super(mongoose, "Chat", QueryBuilder, schema);
   }
 
-  getForAdmin (user: any, receiver: any, request: any) {
-    return this.model.find({
-      condition: {admin: user, driver: receiver, request}
+  getByUserAndEmployee (userId: any, employeeId: any) {
+    return this.model.findOne({
+      condition: {userId, employeeId}
     });
   }
 
-  getForDriver (user: any, receiver: any, request: any) {
+  getByUser (userId: any) {
     return this.model.find({
-      condition: {driver: user, admin: receiver, request}
+      condition: {userId},
+      populate: [['employeeId', 'name']]
+    });
+  }
+
+  getByEmployee (employeeId: any) {
+    return this.model.find({
+      condition: {employeeId},
+      populate: [['userId', 'name']]
+
+    });
+  }
+
+  getById (_id: any) {
+    return this.model.findOne({
+      condition: {_id}
     });
   }
 }

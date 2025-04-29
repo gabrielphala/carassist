@@ -39,4 +39,10 @@ export default class GarageAdmin extends Model {
       populate: [['garage', '']]
     });
   }
+
+  getById(_id: string|Types.ObjectId) {
+    return this.model.findOne({
+      condition: { _id },
+    });
+  }
 }

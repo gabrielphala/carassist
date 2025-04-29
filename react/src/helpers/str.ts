@@ -1,6 +1,6 @@
-export const cutstr = (str: string) => {
-  if (str.length <= 18 || window.innerWidth > 425)
+export const cutstr = (str: string, {offset, ignoreWindow} = {offset: 18, ignoreWindow: false}) => {
+  if (str.length <= offset || (window.innerWidth > 425 && !ignoreWindow))
       return str;
 
-  return `${str.slice(0, 18)}...`;
+  return `${str.slice(0, offset)}...`;
 }

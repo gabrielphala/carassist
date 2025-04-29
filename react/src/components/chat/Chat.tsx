@@ -3,21 +3,18 @@ import { getQuery } from "../../helpers/URL"
 import { getValueById } from "../../helpers/dom"
 import { getUserBySession, postWithAuth } from "../../helpers/http"
 import "./chat.css"
-import { Link } from "react-router-dom"
 
 const getAll = async () => {
   const res = await postWithAuth('/chat/get', {
-    receiver: getQuery('r'),
-    request: getQuery('a')
+    chatId: getQuery('c'),
   })
 
   return res.messages;
 }
 
-export default () => {
+export default (props: any) => {
   const [messages, setMessages] = useState([]) as any;
   const [__user, setUser] = useState([]) as any;
-  const [kind, setKind] = useState('user')
 
   useEffect(() => {
     (async () => {
@@ -25,36 +22,28 @@ export default () => {
 
       setMessages(await getAll());
       setUser(_user)
-
-      setKind(_user.garage ? 'admin' : 'user')
-      
     })()
   }, [])
 
   const sendMessage = async () => {
     await postWithAuth('/chat/send', {
-      receiverId: getQuery('r'),
-      requestId: getQuery('a'),
+      chatId: getQuery('c'),
       message: getValueById('mssg')
     });
 
     (document.getElementById('mssg') as HTMLInputElement).value = '';
 
     setMessages(await getAll());
+
+    props.setRefresh(Math.random())
   }
 
   return (
     <>
-      <Link to={kind == 'user' ? '/u/requests' : '/g/requests'}>
-        <div className="chat-top">
-          <p><strong>Return</strong></p>
-          <p>To requests</p>
-        </div>
-      </Link>
       <div className="chat">
         <div className="chat__messages flex">
-          {messages.map((message: any) => (
-            <p className={`chat__messages__item ${message.sender == kind ? 'chat__messages__item--right' : ''}`}>
+          {messages?.map((message: any) => (
+            <p key={message._id} className={`chat__messages__item ${`${message.sender}` == `${__user._id}` ? 'chat__messages__item--right' : ''}`}>
               {message.message}
             </p>
           ))}
