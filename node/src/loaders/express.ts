@@ -35,7 +35,12 @@ export default async (app: Application) => {
             "/g/employees",
             "/g/services",
             "/a/sign-in",
-            "/a/garages"
+            "/a/garages",
+            "/a/services",
+            "/a/payments",
+            "/a/users",
+            "/a/requests",
+            "/a/employees"
         ];
 
         app.get(routes, function (_, res) {

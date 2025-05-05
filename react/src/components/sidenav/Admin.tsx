@@ -55,14 +55,14 @@ export default () => {
             <p>Requests</p>
           </div>
         </Link>
-        <Link to="/a/payments" className="sidenav__top__item flex flex--a-center">
+        {/* <Link to="/a/payments" className="sidenav__top__item flex flex--a-center">
           <div className="sidenav__top__item__icon">
             <i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i>
           </div>
           <div className="sidenav__top__item__text">
             <p>Payments</p>
           </div>
-        </Link>
+        </Link> */}
         <Link to="/a/services" className="sidenav__top__item flex flex--a-center">
           <div className="sidenav__top__item__icon">
             <i className="fa-solid fa-store" aria-hidden="true"></i>

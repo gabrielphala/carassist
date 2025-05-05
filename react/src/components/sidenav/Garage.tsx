@@ -1,6 +1,13 @@
 import { Link, useNavigate } from "react-router-dom"
 import { $cls } from "../../helpers/dom"
 import { postWithAuth } from "../../helpers/http"
+import { useEffect, useState } from "react"
+
+export const getChatCount = async () => {
+  const res = await postWithAuth('/chat/get/count', {})
+
+  return res.count || 0;
+}
 
 export const toggleSidenav = () => {
   let sidenav = $cls('sidenav')[0]
@@ -22,6 +29,7 @@ export const toggleSidenav = () => {
 }
 
 export default () => {
+  const [count, setCount] = useState<number>(0);
   const nav = useNavigate();
 
   const signOut = () => {
@@ -29,6 +37,10 @@ export default () => {
 
     nav('/g/sign-in');
   }
+
+  useEffect(() => {
+    (async () => { setCount(await getChatCount()) })()
+  }, [])
 
   return (
     <div className="sidenav flex">
@@ -48,6 +60,19 @@ export default () => {
           </div>
           <div className="sidenav__top__item__text">
             <p>Requests</p>
+          </div>
+        </Link>
+        <Link to={"/g/chat"} className="sidenav__top__item flex flex--a-center">
+          <div className="sidenav__top__item__icon pos--rel">
+            <i className="fa-regular fa-comments" aria-hidden="true"></i>
+            <p className="pos--abs" style={{
+              top: '-1rem',
+              right: '1rem',
+              color: 'darkblue'
+            }} id="chat-count">{count}</p>
+          </div>
+          <div className="sidenav__top__item__text">
+            <p>Inbox</p>
           </div>
         </Link>
         <Link to="/g/services" className="sidenav__top__item flex flex--a-center">

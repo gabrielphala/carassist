@@ -3,7 +3,7 @@ import Chat from "../models/Chat";
 import Message from "../models/Message";
 import User from "../models/User";
 import GarageAdmin from "../models/GarageAdmin";
-import Garage from "../models/Garage/Garage";
+import UnreadCount from "../models/UnreadCount";
 import { sendSMS } from "./Sms";
 
 export async function create (body: any, user: any) {
@@ -47,6 +47,45 @@ export async function send(body, user) {
       chat: body.chatId,
       message: body.message,
     });
+
+    await UnreadCount.addChat(
+      receiverUser._id, 
+      `${chat.employeeId}` == `${user._id}` ? 'driver' : 'employee',
+      body.chatId
+      )
+
+    this.successful = true;
+  } catch (e) {
+    throw e;
+  }
+
+  return this;
+}
+
+export async function markAsRead(body, user) {
+  try {
+    await UnreadCount.removeChat(
+      user._id, 
+      user.garage ? 'employee' : 'driver',
+      body.chatId
+      )
+
+    this.successful = true;
+  } catch (e) {
+    throw e;
+  }
+
+  return this;
+}
+
+export async function getCount(body, user) {
+  try {
+    let res = await UnreadCount.getByUser(
+      user._id, 
+      user.garage ? 'employee' : 'driver',
+      );
+
+    this.count = !res ? 0 : (res.chats || []).length;
 
     this.successful = true;
   } catch (e) {

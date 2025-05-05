@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { getQuery } from "../../helpers/URL"
-import { getValueById } from "../../helpers/dom"
+import { getElementById, getValueById } from "../../helpers/dom"
 import { getUserBySession, postWithAuth } from "../../helpers/http"
+import { getChatCount } from "../sidenav/Garage"
 import "./chat.css"
 
 const getAll = async () => {
@@ -12,18 +13,30 @@ const getAll = async () => {
   return res.messages;
 }
 
+const readChat = async () => {
+  const res = await postWithAuth('/chat/read', {
+    chatId: getQuery('c'),
+  })
+
+  getElementById(
+    'chat-count'
+  ).innerText = await getChatCount()
+}
+
 export default (props: any) => {
   const [messages, setMessages] = useState([]) as any;
+  const [messageSent, setMessageSent] = useState<number>(0);
   const [__user, setUser] = useState([]) as any;
 
   useEffect(() => {
     (async () => {
       let _user = await getUserBySession();
 
+      readChat();
       setMessages(await getAll());
       setUser(_user)
     })()
-  }, [])
+  }, [messageSent])
 
   const sendMessage = async () => {
     await postWithAuth('/chat/send', {
@@ -36,6 +49,7 @@ export default (props: any) => {
     setMessages(await getAll());
 
     props.setRefresh(Math.random())
+    setMessageSent(Math.random())
   }
 
   return (

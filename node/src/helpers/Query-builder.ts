@@ -103,10 +103,11 @@ export default class QueryBuilder {
       else reject("Something went wrong, try again later");
     });
 
-  updateOneAndGet = (condition, data) =>
+  updateOneAndGet = (condition, data, upsert=false) =>
     new Promise((resolve, reject) => {
       const update = this._model.findOneAndUpdate(condition, data, {
         new: true,
+        upsert
       });
 
       resolve(update);

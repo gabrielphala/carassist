@@ -23,6 +23,9 @@ export default () => {
   useEffect(() => {
     (async () => {
       setChats(await getChats());
+
+      console.log('Refershed');
+      
     })()
   }, [refresh])
 
@@ -51,9 +54,15 @@ export default () => {
               <p style={{ textAlign: 'center' }} className="margin--top-1">No chats</p>
             )}
           </div>
-          <div className="info__pad__messages">
+          <div className="info__pad__messages pos--rel" style={{ flex: '1', padding: '3rem 0' }}>
             {
-              getQuery('c') && <Chat setRefresh={setRefresh}></Chat>
+              getQuery('c') ? <Chat setRefresh={setRefresh}></Chat> : (
+                <div className="pos--abs pos--horizontal">
+                  <p style={{textAlign: 'center'}}><i className="fa-regular fa-comments" style={{ fontSize: '5rem' }}></i></p>
+                  <p style={{ textAlign: 'center' }} className="margin--top-1"><b>No chat selected</b></p>
+                  <p style={{ textAlign:'center' }}>Please select a chat to continue</p>
+                </div>
+              )
             }
           </div>
         </div>
