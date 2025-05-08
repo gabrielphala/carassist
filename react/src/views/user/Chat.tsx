@@ -9,6 +9,7 @@ import date from "../../helpers/date";
 import "./Chat.css"
 import { getQuery } from "../../helpers/URL";
 import { Link } from "react-router-dom";
+import { hideChats, showChats } from "../garage/Chat";
 
 const getChats = async (): Promise<any> => {
   const res = await postWithAuth('/chat/get/by/user', {})
@@ -23,9 +24,6 @@ export default () => {
   useEffect(() => {
     (async () => {
       setChats(await getChats());
-
-      console.log('Refershed');
-      
     })()
   }, [refresh])
 
@@ -39,9 +37,11 @@ export default () => {
       <div className="chats info__pad">
         <div className="flex">
           <div className="info__pad__chats">
+            <p onClick={hideChats} className="mobile-chat-btn margin--bottom-1"><i className="fa-regular fa-circle-xmark margin--right-1"></i>Close chats</p>
+
             {
               chats?.map((chat: any) => (
-                <Link to={`/u/chat?c=${chat._id}`} onClick={() => setRefresh(Math.random())}>
+                <Link to={`/u/chat?c=${chat._id}`} onClick={() => {hideChats(); setRefresh(Math.random())}}>
                   <div className="info__pad__chats__item" key={chat._id}>
                     <p><b>{chat.employeeId.name}</b></p>
                     <p>{cutstr(chat.message, { ignoreWindow: true, offset: 26 })} <small>{date(new Date(chat.messageDate))}</small></p>
@@ -54,7 +54,9 @@ export default () => {
               <p style={{ textAlign: 'center' }} className="margin--top-1">No chats</p>
             )}
           </div>
-          <div className="info__pad__messages pos--rel" style={{ flex: '1', padding: '3rem 0' }}>
+          <div className="info__pad__messages pos--rel" style={{ flex: '1' }}>
+            <p onClick={showChats} className="mobile-chat-btn"><i className="fa-regular fa-comments margin--right-1"></i>See chats</p>
+
             {
               getQuery('c') ? <Chat setRefresh={setRefresh}></Chat> : (
                 <div className="pos--abs pos--horizontal">

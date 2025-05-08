@@ -22,6 +22,7 @@ export default ({ children }: any) => {
       <div className="info">
         <div id="dropdown-menu" className="dropdown-menu">
           <p><Link to="/u/requests">Requests</Link></p>
+          <p><Link to="/u/chat">Chat</Link></p>
           <p onClick={signOut}>Sign Out</p>
         </div>
         {children}

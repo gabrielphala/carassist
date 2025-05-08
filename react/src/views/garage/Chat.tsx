@@ -9,11 +9,20 @@ import { getQuery } from "../../helpers/URL";
 
 import "../user/Chat.css"
 import { Link } from "react-router-dom";
+import { $cls } from "../../helpers/dom";
 
 const getChats = async (): Promise<any> => {
   const res = await postWithAuth('/chat/get/by/employee', {})
 
   return res.chats;
+}
+
+export const showChats = () => {
+  $cls('info__pad__chats')[0].classList.add('mobile-open')
+}
+
+export const hideChats = () => {
+  $cls('info__pad__chats')[0].classList.remove('mobile-open')
 }
 
 export default () => {
@@ -36,9 +45,10 @@ export default () => {
       <div className="chats info__pad">
         <div className="flex">
           <div className="info__pad__chats">
+            <p onClick={hideChats} className="mobile-chat-btn margin--bottom-1"><i className="fa-regular fa-circle-xmark margin--right-1"></i>Close chats</p>
             {
               chats?.map((chat: any) => (
-                <Link to={`/g/chat?c=${chat._id}`} onClick={() => setRefresh(Math.random())}>
+                <Link to={`/g/chat?c=${chat._id}`} onClick={() => {hideChats(); setRefresh(Math.random())}}>
                   <div className="info__pad__chats__item" key={chat._id}>
                     <p><b>{chat.userId.name}</b></p>
                     <p>{cutstr(chat.message || '', { ignoreWindow: true, offset: 26 })} <small>{chat.messageDate && date(new Date(chat.messageDate))}</small></p>
@@ -51,7 +61,8 @@ export default () => {
               <p style={{ textAlign: 'center' }} className="margin--top-1">No chats</p>
             )}
           </div>
-          <div className="info__pad__messages pos--rel" style={{ flex: '1', padding: '3rem 0' }}>
+          <div className="info__pad__messages pos--rel" style={{ flex: '1' }}>
+            <p onClick={showChats} className="mobile-chat-btn"><i className="fa-regular fa-comments margin--right-1"></i>See chats</p>
             {
               getQuery('c') ? <Chat setRefresh={setRefresh}></Chat> : (
                 <div className="pos--abs pos--horizontal">

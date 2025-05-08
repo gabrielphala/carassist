@@ -67,7 +67,9 @@ export default (props: any) => {
           <div className="input">
             <input type="text" id="mssg" placeholder="Type message" />
           </div>
-          <button className="btn btn--primary" onClick={sendMessage}>Send</button>
+          <button className="btn btn--primary" onClick={sendMessage}>
+            <i className="fa-solid fa-paper-plane"></i>
+          </button>
         </div>
       </div>
     </>

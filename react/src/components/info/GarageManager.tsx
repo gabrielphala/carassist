@@ -24,6 +24,7 @@ export default ({ children }: any) => {
           <p><Link to="/g/requests">Requests</Link></p>
           <p><Link to="/g/services">Services</Link></p>
           <p><Link to="/g/employees">Employees</Link></p>
+          <p><Link to="/g/chat">Chat</Link></p>
           <p onClick={signOut}>Sign Out</p>
         </div>
         {children}

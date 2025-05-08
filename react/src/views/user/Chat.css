@@ -8,9 +8,44 @@
   padding: 1rem;
 }
 
+.info__pad__chats.mobile-open{
+  position: absolute;
+  display: block;
+  width: calc(100% - 12%);
+  left: 6%;
+  height: calc(100% - 17rem);
+  background: #fff;
+  z-index: 100;
+  margin: 0;
+}
+
+.info__pad__messages{
+  padding: 0 3rem;
+}
+
 .info__pad__chats__item{
   margin-bottom: 1rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
   cursor: pointer;
+}
+
+@media screen and (min-width: 0px) and (max-width: 800px) {
+  .chat{
+    width: 100%;
+  }
+
+  .info__pad__messages{
+    padding: 0 !important;
+  }
+
+  .info__pad__chats {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 801px){
+  .mobile-chat-btn {
+    display: none;
+  }
 }

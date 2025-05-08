@@ -1,6 +1,5 @@
 .chat{
-  width: 70rem;
-  margin: 2rem auto 0;
+  margin: .7rem auto 0;
   border: 1px solid #eee;
   padding: 2rem;
   border-radius: 10px;
@@ -25,7 +24,15 @@
   align-self: flex-end;
 }
 
+.chat__footer{
+  align-items: center;
+}
+
 .chat__footer .input{
   flex: 1;
-  margin-right: 2rem;
+}
+
+.chat__footer button{
+  padding: .7rem 1.6rem;
+  border-radius: 1rem;
 }
