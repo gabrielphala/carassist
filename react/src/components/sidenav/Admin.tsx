@@ -47,6 +47,14 @@ export default () => {
             <p>Drivers</p>
           </div>
         </Link>
+        <Link to="/a/payments" className="sidenav__top__item flex flex--a-center">
+          <div className="sidenav__top__item__icon">
+            <i className="fa-solid fa-money-bill"></i>
+          </div>
+          <div className="sidenav__top__item__text">
+            <p>Payments</p>
+          </div>
+        </Link>
         <Link to="/a/requests" className="sidenav__top__item flex flex--a-center">
           <div className="sidenav__top__item__icon">
             <i className="fa-regular fa-file-lines" aria-hidden="true"></i>

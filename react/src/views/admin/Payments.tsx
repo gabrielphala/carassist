@@ -31,10 +31,8 @@ export default () => {
           <thead>
             <tr>
               <th>#</th>
-              <th>From</th>
               <th>Price</th>
-              <th>To</th>
-              <th>Service</th>
+              <th>Item</th>
             </tr>
           </thead>
           <tbody>
@@ -42,10 +40,8 @@ export default () => {
               payments?.map((payment: any, i: number) => (
                 <tr key={payment._id}>
                   <td>{i + 1}</td>
-                  <td>{payment.requester.name}</td>
-                  <td>R{payment.price}</td>
-                  <td>{payment.garage.name}</td>
-                  <td>{payment.service}</td>
+                  <td>R{payment.price || '0'}</td>
+                  <td>{payment.item}</td>
                 </tr>
               ))
             }

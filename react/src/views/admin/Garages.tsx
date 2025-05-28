@@ -5,7 +5,7 @@ import { BASEURL, postWithAuth } from "../../helpers/http";
 import "./Garage.css"
 
 const getGarages = async (): Promise<any> => {
-  const res = await postWithAuth('/garages/get/unverified', {})
+  const res = await postWithAuth('/garages/get/all', {})
 
   return res.garages;
 }
@@ -75,16 +75,23 @@ export default () => {
                   <td>{garage.name}</td>
                   <td>{garage.locationName}</td>
                   <td>{garage.registrationNumber}</td>
-                  <td className="flex" style={{ justifyContent: 'flex-end' }}>
-                    <span style={{ marginRight: '1rem' }}>
-                      {!garage.isRegistrationDocumentPhoto ?
-                        (<a href={`${BASEURL()}/assets/uploads/documents/${garage.registrationDocument}`} download={true}>Download Document</a>) :
-                        (<p onClick={() => downloadImage(garage.registrationDocument)}>Download document</p>)
-                      }
-                    </span>
-                    <span onClick={() => acceptGarage(garage._id)} style={{ color: 'blue' }} className="margin--right-1 hover">Accept</span>
-                    <span onClick={() => declineGarage(garage._id)}  style={{ color: 'darkred' }} className="hover">Decline</span>
-                  </td>
+
+                  {
+                    garage.isVerified ? 
+                    (<td>Verified</td>) : (
+                    <td className="flex" style={{ justifyContent: 'flex-end' }}>
+                      <span style={{ marginRight: '1rem' }}>
+                        {!garage.isRegistrationDocumentPhoto ?
+                          (<a href={`${BASEURL()}/assets/uploads/documents/${garage.registrationDocument}`} download={true}>Download Document</a>) :
+                          (<p onClick={() => downloadImage(garage.registrationDocument)}>Download document</p>)
+                        }
+                      </span>
+                      <span onClick={() => acceptGarage(garage._id)} style={{ color: 'blue' }} className="margin--right-1 hover">Accept</span>
+                      <span onClick={() => declineGarage(garage._id)} style={{ color: 'darkred' }} className="hover">Decline</span>
+                    </td>
+                    )
+                  }
+                  
                 </tr>
               ))
             }

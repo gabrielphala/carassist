@@ -40,7 +40,7 @@ export async function send(body, user) {
       await User.getById(chat.userId) :
       await GarageAdmin.getById(chat.employeeId)
 
-    if (receiverUser.phone) sendSMS(receiverUser.phone, `You have a message from mechanic - ${senderUser.name}`)
+    if (receiverUser.phone) sendSMS(receiverUser.phone, `You have a message from ${senderUser.name}`)
 
     await Message.add({
       sender,

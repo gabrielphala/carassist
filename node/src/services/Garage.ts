@@ -13,6 +13,17 @@ async function getAllByUnverified(body: any): Promise<IResponse> {
   return this;
 }
 
+async function getAll(body: any): Promise<IResponse> {
+  try {
+    const garages = await Garage.getAll();
+
+    this.garages = garages;
+  } catch (error) {
+    throw error;
+  }
+  return this;
+}
+
 async function acceptGarage(body: any): Promise<IResponse> {
   await Garage.updateOne(
     { _id: body.garageId },
@@ -37,4 +48,4 @@ async function declineGarage(body: any): Promise<IResponse> {
   return this;
 }
 
-export default { getAllByUnverified, acceptGarage, declineGarage };
+export default { getAllByUnverified, getAll, acceptGarage, declineGarage };

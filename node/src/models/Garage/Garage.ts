@@ -43,4 +43,10 @@ export default class Garage extends Model {
       condition: { isVerified: false, isDeclined: false },
     });
   }
+
+  getAll() {
+    return this.model.find({
+      condition: { isDeclined: false },
+    });
+  }
 }
