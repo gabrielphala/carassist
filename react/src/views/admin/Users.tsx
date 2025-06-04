@@ -7,7 +7,7 @@ import date from "../../helpers/date";
 // import { downloadImage } from "./Garages";
 
 const getDrivers = async (): Promise<any> => {
-  const res = await postWithAuth('/users/get/unverified', {})
+  const res = await postWithAuth('/users/get/drivers', {})
 
   return res.drivers;
 }
