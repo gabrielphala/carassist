@@ -104,12 +104,17 @@ export default () => {
   function calcRoute(start: any, end: any) {
     getElementById('maps-con')?.classList.remove('hide')
 
+    console.log(start, end);
+    
+
     var request = {
       origin: new maps.LatLng(start.lat, start.lng),
       destination: new maps.LatLng(end.lat, end.lng),
       travelMode: 'DRIVING'
     };
     directionsService.route(request, function (result: any, status: any) {
+      console.log(result, status);
+      
       if (status == 'OK') {
         directionsRenderer.setDirections(result);
         directionsRenderer.setMap(map)

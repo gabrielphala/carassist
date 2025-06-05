@@ -4,6 +4,7 @@ import { postWithAuth } from "../../helpers/http";
 import { getElementById, getValueById } from "../../helpers/dom";
 import GarageManager from "../../components/info/GarageManager";
 import ServiceCard from "../../components/service-card/ServiceCard";
+import { showError } from "../../helpers/error";
 
 export default () => {
   const [services, setServices] = useState([]) as any;
@@ -23,15 +24,23 @@ export default () => {
   async function addService (e: any) {
     (e as PointerEvent).preventDefault()
 
+    getElementById('new-service-modal').style.pointerEvents = 'none';
+
     const res = await postWithAuth('/services/add', {
       name: getValueById('service-name'),
       isPriceUserDefined: (getElementById('service-is-user-price') as HTMLInputElement).checked,
       price: getValueById('service-price')
     })
 
-    if (res.successful) closeModal('new-service')
+    getElementById('new-service-modal').style.pointerEvents = 'auto';
 
-    await _setServices()
+    if (res.successful) {
+      closeModal('new-service');
+
+      return await _setServices();
+    }
+
+    showError('service', res.error);
   }
 
   async function removeService(e: any, id: string) {
@@ -71,6 +80,10 @@ function ServiceModal (props: any) {
         </div>
         <div className="modal__main__body">
           <div className="model__main__body__form">
+            <div id="service-error" className="error hide">
+              <p><b>Sorry, </b><span className="error-msg"></span></p>
+            </div>
+
             <div className="input">
               <input type="text" id="service-name" placeholder="Service name" />
             </div>

@@ -39,6 +39,8 @@ export default (props: any) => {
   }, [messageSent])
 
   const sendMessage = async () => {
+    getElementById('chat-btn').style.pointerEvents = 'none';
+
     await postWithAuth('/chat/send', {
       chatId: getQuery('c'),
       message: getValueById('mssg')
@@ -50,6 +52,8 @@ export default (props: any) => {
 
     props.setRefresh(Math.random())
     setMessageSent(Math.random())
+
+    getElementById('chat-btn').style.pointerEvents = 'auto';
   }
 
   return (
@@ -67,7 +71,7 @@ export default (props: any) => {
           <div className="input">
             <input type="text" id="mssg" placeholder="Type message" />
           </div>
-          <button className="btn btn--primary" onClick={sendMessage}>
+          <button className="btn btn--primary" id="chat-btn" onClick={sendMessage}>
             <i className="fa-solid fa-paper-plane"></i>
           </button>
         </div>

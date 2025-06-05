@@ -54,13 +54,13 @@ export default () => {
     })()
   }, [])
 
-  console.log(requests);
-  
 
   const sendRequest = async (e: any, garageId: string, service: string, price: string) => {
     let parent = e.target.parentElement;
 
     let input = parent.getElementsByClassName('price-input')[0];
+
+    getElementById('request-modal').style.pointerEvents = 'none';
 
     await postWithAuth('/requests/add', {
       garageId,
@@ -73,6 +73,8 @@ export default () => {
 
     getElementById('request-modal')
       .classList.add('modal--closed')
+
+    getElementById('request-modal').style.pointerEvents = 'auto';
 
     setQuery('')
 

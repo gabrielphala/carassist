@@ -22,6 +22,7 @@ export default () => {
 
 	const signUp = async (e: any) => {
 		(e as PointerEvent).preventDefault();
+    getElementById('auth').style.pointerEvents = 'none';
 
     const body: any = {
       firstName: getValueById('first-name'),
@@ -46,6 +47,8 @@ export default () => {
     })
 
     setAuth(res.successful);
+    
+    getElementById('auth').style.pointerEvents = 'auto';
 
     if (res.error) {
       showError('auth', res.error)
@@ -219,7 +222,7 @@ export default () => {
           </div>
           <input type="file" id="id-document-file" hidden />
 
-          <button type="submit" className="btn btn--primary margin--top-2">Sign up</button>
+          <button type="submit" id="auth" className="btn btn--primary margin--top-2">Sign up</button>
 
           <div className="camera hide" id="camera-con">
             <div className="camera__main" id="camera-main">

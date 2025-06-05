@@ -1,9 +1,20 @@
 import { IResponse } from "../interfaces";
 import Service from "../models/Service";
 import { getDistance } from "../helpers/Distance";
+import v, {Validation} from "../helpers/Validation";
 
 export async function addService(body, user) {
   try {
+    v.validate({
+      'Service name': { value: body.name, min: 3, max: 50, type: Validation.TITLE },
+      'Service price': { value: body.price, min: 1, max: 5, type: Validation.NUMBER, ntu: true },
+    })
+
+    if (body.isPriceUserDefined && body.price && parseFloat(body.price) > 0)
+      throw 'You cannot allow custom prices and fixed price';
+
+    if (!body.price && !body.isPriceUserDefined) throw 'Please specify price or allow users to input their own prices'
+
     await Service.add({
       name: body.name,
       garage: user.garage,

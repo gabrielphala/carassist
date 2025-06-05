@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postWithAuth } from "../../helpers/http";
-import { getValueById } from "../../helpers/dom";
+import { getElementById, getValueById } from "../../helpers/dom";
 
 import "./auth.css"
 import { showError } from "../../helpers/error";
@@ -13,6 +13,7 @@ export default () => {
 
   const signIn = async (e: any) => {
     (e as PointerEvent).preventDefault();
+    getElementById('auth').style.pointerEvents = 'none';
 
     const res = await postWithAuth('/a/sign-in', {
       email: getValueById('email'),
@@ -20,6 +21,8 @@ export default () => {
     }, true)
 
     setAuth(res.successful);
+
+    getElementById('auth').style.pointerEvents = 'auto';
 
     if (res.error) {
       showError('auth', res.error)
@@ -48,7 +51,7 @@ export default () => {
             <input type="password" id="password" placeholder="Password." />
           </div>
 
-          <button className="btn btn--primary margin--top-2">Sign in</button>
+          <button id="auth" className="btn btn--primary margin--top-2">Sign in</button>
 
           <p className="admin-login__main__form__home margin--top-2"><Link to="/">Go home instead</Link></p>
         </form>

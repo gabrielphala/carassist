@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postWithAuth } from "../../helpers/http";
-import { getValueById } from "../../helpers/dom";
+import { getElementById, getValueById } from "../../helpers/dom";
 
 import "./auth.css"
 import { showError } from "../../helpers/error";
@@ -13,6 +13,8 @@ export default () => {
 
 	const signIn = async (e: any) => {
 		(e as PointerEvent).preventDefault();
+    getElementById('auth').style.pointerEvents = 'none';
+
 
     const res = await postWithAuth('/g/sign-in', {
 			email: getValueById('email'),
@@ -20,6 +22,8 @@ export default () => {
 		}, true)
 
 		setAuth(res.successful);
+
+    getElementById('auth').style.pointerEvents = 'auto';
 
     if (res.error) {
       showError('auth', res.error)
@@ -54,7 +58,7 @@ export default () => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn--primary margin--top-2">Sign in</button>
+          <button type="submit" id="auth" className="btn btn--primary margin--top-2">Sign in</button>
 
           <div className="auth__main__form__footer flex flex--j-space-around margin--top-2">
             <p><Link to="/g/sign-up">Sign up instead</Link></p>

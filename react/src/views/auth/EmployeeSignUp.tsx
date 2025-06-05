@@ -27,6 +27,8 @@ export default () => {
 
   const signUp = async (e: any) => {
 		(e as PointerEvent).preventDefault();
+    getElementById('auth').style.pointerEvents = 'none';
+
 
     let body: any = {
       name: getValueById('full-name'),
@@ -55,6 +57,8 @@ export default () => {
     })
 
 		setAuth(res.successful);
+
+    getElementById('auth').style.pointerEvents = 'auto';
 
     if (res.error) {
       showError('auth', res.error)
@@ -274,7 +278,7 @@ export default () => {
           </div>
           <input type="file" id="registration-file" hidden />
 
-          <button type="submit" className="btn btn--primary margin--top-2">Sign up</button>
+          <button type="submit" id="auth" className="btn btn--primary margin--top-2">Sign up</button>
 
           <div className="auth__main__form__footer flex flex--j-space-around margin--top-2">
             <p><Link to="/g/sign-in">Sign in instead</Link></p>
