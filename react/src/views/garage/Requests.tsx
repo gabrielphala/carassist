@@ -4,6 +4,7 @@ import RequestCard from "../../components/request-card/RequestCard";
 import { postWithAuth } from "../../helpers/http";
 import { getElementById } from "../../helpers/dom";
 import { maps, initMap } from "../../helpers/map"
+import { allEmpty } from "../../helpers/array";
 
 
 const getRequests = async (): Promise<any> => {
@@ -129,8 +130,9 @@ export default () => {
   return (
     <GarageManager>
       <div className="info__page-heading">
-        <h1>Requests</h1>
-        <p>Received requests from drivers</p>
+        <h1><i className="fa-regular fa-file-lines margin--right-1"></i>Requests</h1>
+        <p>Received requests from drivers.</p>
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="info__pad">
@@ -144,6 +146,14 @@ export default () => {
             decline={decline} {...item} />)
           }
         </div>
+
+        {allEmpty(requests) && (
+          <div className="garage-list__result-msg flex flex--a-center">
+            <img src="/illustration/no-data.svg" alt="Happy bird" />
+            <h1 className="margin--top-1">Nothing to see here.</h1>
+            <p>No requests from drivers.</p>
+          </div>
+        )}
       </div>
 
       <div className="popup-overlay hide" id="popup-employees-con" onClick={hideEmployees}>

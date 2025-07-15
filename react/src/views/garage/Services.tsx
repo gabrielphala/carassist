@@ -56,8 +56,9 @@ export default () => {
   return (
     <GarageManager>
       <div className="info__page-heading">
-        <h1>Services</h1>
+        <h1><i className="fa-solid fa-store margin--right-1"></i>Services</h1>
         <p>Services offered by garage</p>
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="info__pad">

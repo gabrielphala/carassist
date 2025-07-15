@@ -5,7 +5,7 @@
   justify-content: space-between;
   width: 5rem;
   height: 100%;
-  background-color: #d4d4d4;
+  background-color: #050516;
   overflow: hidden;
   padding: 2rem 0;
   transition: width .2s ease;
@@ -20,7 +20,7 @@
 }
 
 .sidenav__top__item:not(:last-child), .sidenav__bottom__item:not(:last-child){
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .sidenav__top__item__icon, .sidenav__bottom__item__icon{
@@ -30,6 +30,7 @@
 
 .sidenav i{
   font-size: 1.6rem;
+  color: #d9d9d9;
 }
 
 @media only screen and (max-width: 426px) {

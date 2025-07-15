@@ -19,10 +19,11 @@
 }
 
 .info__page-heading__hr{
-  width: 15rem;
+  width: 7rem;
   height: 2px;
   background-color: #50a2e6;
   margin-top: 1rem;
+  margin-bottom: -1rem;
 }
 
 .info__requests, .info__services, .info__employees{
@@ -37,8 +38,21 @@
   display: none;
 }
 
+.search-services input{
+  border: 2px solid #4e9dff !important;
+}
+
 .dropdown-menu.open{
   display: block;
+}
+
+.garage-list__result-msg{
+  margin-top: 3rem;
+  flex-direction: column;
+}
+
+.garage-list__result-msg img {
+  width: 12rem;
 }
 
 @media only screen and (max-width: 426px) {

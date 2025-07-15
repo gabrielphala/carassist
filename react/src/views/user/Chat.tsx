@@ -30,8 +30,9 @@ export default () => {
   return (
     <UserManager>
       <div className="info__page-heading">
-        <h1>Messaging</h1>
+        <h1><i className="fa-regular fa-comments margin--right-1"></i>Messaging</h1>
         <p>Message your mechanic</p>
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="chats info__pad">

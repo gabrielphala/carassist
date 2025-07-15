@@ -38,8 +38,9 @@ export default () => {
   return (
     <GarageManager>
       <div className="info__page-heading">
-        <h1>Messaging</h1>
-        <p>Message your mechanic</p>
+        <h1><i className="fa-regular fa-comments margin--right-1"></i>Messaging</h1>
+        <p>Message your client</p>
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="chats info__pad">

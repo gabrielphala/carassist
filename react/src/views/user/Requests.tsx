@@ -6,6 +6,7 @@ import UserManager from "../../components/info/UserManager";
 import RequetModal from "./RequetModal";
 import RequestCard from "../../components/request-card/RequestCard";
 import Notification, { showNotification } from "../../components/notification/Notification";
+import { allEmpty } from "../../helpers/array";
 
 const getRequests = async (): Promise<any> => {
   const res = await postWithAuth('/requests/get/by/user', {})
@@ -136,23 +137,40 @@ export default () => {
   return (
     <UserManager>
       <div className="info__page-heading">
-        <h1>Requests</h1>
+        <h1><i className="fa-regular fa-file-lines margin--right-1"></i>Requests</h1>
         <p>Requests for help from garages.</p>
-
-        {/* <div className="info__page-heading__hr"></div> */}
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="info__pad">
         <div className="search-services" style={{ margin: '5rem 15% 3rem' }}>
-          <p><b>Search a garage</b></p>
           <div className="input">
             <input type="text" id="search-service" onChange={(e) => setQuery(e.target.value)} onKeyUp={() => searchGaragesByServices()} value={query} placeholder="Search garages by services..." />
           </div>
           <div className="garage-list">
             <table style={{ width: '100%' }} className="margin--top-2">
+              {
+                allEmpty(query, requests, garages) && (
+                  <div className="garage-list__result-msg flex flex--a-center">
+                    <img src="/illustration/happy-bird.svg" alt="Happy bird" />
+                    <h1 className="margin--top-1">Nothing to see here.</h1>
+                    <p>Search services offered.</p>
+                  </div>
+                )
+              }
+
+              { query && allEmpty(garages) && (
+                <div className="garage-list__result-msg flex flex--a-center">
+                  <img src="/illustration/no-data.svg" alt="No data" />
+                  <h1 className="margin--top-1">No services.</h1>
+                  <p>No garages offer '{query}'.</p>
+                </div>
+              ) }
+
               <tbody>
                 {
-                  garages?.map((garage: any) => (
+                  garages?.map((garage: any) =>
+                  (
                     <tr key={garage._id} data-garageid={garage._id} data-garage={garage.name} data-services={`${JSON.stringify(garage.services)}`}>
                       <td>{garage.name}</td>
                       <td>{garage.distance.toFixed(2)}k Away</td>

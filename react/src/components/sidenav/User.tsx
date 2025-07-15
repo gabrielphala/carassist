@@ -44,7 +44,7 @@ export default () => {
             <p className="pos--abs" style={{
               top: '-1rem',
               right: '1rem',
-              color: 'darkblue'
+              color: '#acacac'
             }} id="chat-count">{count}</p>
           </div>
           <div className="sidenav__top__item__text">

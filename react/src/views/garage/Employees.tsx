@@ -14,18 +14,12 @@ export default () => {
     })()
   }, [])
 
-  // const employees = [
-  //   {
-  //     id: 1,
-  //     name: 'Gabriel Phala'
-  //   }
-  // ];
-
   return (
     <GarageManager>
       <div className="info__page-heading">
-        <h1>Employees</h1>
+        <h1><i className="fa-solid fa-users margin--right-1"></i>Employees</h1>
         <p>Your colleages from your garage</p>
+        <div className="info__page-heading__hr"></div>
       </div>
 
       <div className="info__pad">
