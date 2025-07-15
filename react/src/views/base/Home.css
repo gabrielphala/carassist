@@ -1,112 +1,65 @@
-.h-header{
-  padding: 0 5%;
-  min-height: 5rem;
+.showcase__back {
+  height: 100vh;
+  filter: brightness(.2);
 }
 
-.h-header__menu{
-  gap: 1rem;
+.services {
+  padding: 7rem 6rem;
 }
 
-.h-header__menu li{
-  background-color: #eee;
-  color: #000;
-  padding: .1rem 1rem;
-  border-radius: 9px;
+.services__list {
+  gap: 3rem;
+  flex-wrap: wrap;
+
+
 }
 
-.h-showcase{
-  flex-direction: column;
-  align-items: center;
-}
-
-.h-showcase__main-caption{
-  margin-top: 3rem;
-  width: 60rem;
-}
-
-.h-showcase__main-caption h1{
-  color: #000;
-  font-size: 3.3rem;
+.services__list__item {
+  flex: 0 0 calc(100% / 3 - 2rem);
   text-align: center;
-}
-
-.h-showcase__main-img{
-  margin-top: 3rem;
-  width: 90rem;
-  height: 40rem;
-  border-radius: 3rem;
-  filter: brightness(.7);
-}
-
-.h-showcase__main-mini-img{
-  position: absolute;
-  width: 12rem;
-  height: 22rem;
-  right: -6rem;
-  border-radius: 2rem;
-  border: 2px solid #fcfcfc;
-}
-
-.h-title{
-  margin: 5rem 0 3rem;
-}
-
-.h-title h2{
-  font-size: 2.5rem;
-  color: #000;
-  text-align: center;
-}
-
-.h-title p{
-  text-align: center;
-}
-
-.h-services__list, .h-testimonials__list{
-  display: flex;
-  gap: 2rem;
-  padding: 0 15%;
-}
-
-.h-services__list h4{
-  color: #000;
-}
-
-.h-services__list__item{
-  border: 1px solid #000;
-  border-radius: 1rem;
-  padding: 1rem 1.6rem;
-}
-
-.h-testimonials__list__item{
-  flex: 1;
-  background-color: #ddd;
-  padding: 3rem;
-  border-radius: 1rem;
-}
-
-.h-stats{
-  padding: 0 5%;
-  margin: 5rem 0;
-}
-
-.h-stats__list{
-  gap: 5%;
-  color: #000;
-}
-
-.h-stats__list h4{
- text-align: center;
-}
-
-.h-stats__list h4:first-child{
-  font-size: 3rem;
-  font-weight: lighter;
-}
-
-.h-testimonials__list{
-  margin-bottom: 7rem;
-}
-
-.h-stats__list h4:last-child {
-  font-weight: lighter;
-}
+    border: 1px solid #c2c1c1;
+    padding: 3rem 3rem;
+    border-radius: 6px;
+  }
+  
+  .services__list__item h4 {
+    margin: .5rem 0 1rem 0;
+  
+  
+  }
+  
+  .services__list__item i {
+    font-size: 4rem;
+    color: #0071ce;
+  }
+  
+  @media only screen and (max-width: 988px) {
+    .showcase button {
+      background-color: lightblue;
+      bottom: 4rem !important;
+    }
+  }
+  
+  @media only screen and (max-width: 850px) {
+    .services__list__item {
+      flex: 0 0 calc(100% / 2 - 2rem);
+    }
+  
+  }
+  
+  @media only screen and (max-width: 550px) {
+    .services__list__item {
+      flex: 0 0 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 426px) {
+    .showcase h1 {
+      font-size: 4.5rem !important;
+    }
+  
+    header,
+    .services {
+      padding: 2rem !important;
+    }
+  }
