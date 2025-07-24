@@ -1,3 +1,7 @@
+header img{
+  width: 7rem;
+}
+
 header.header{
   position: absolute;
   width: calc(100% - 5rem);
@@ -6,6 +10,11 @@ header.header{
   height: 6rem;
   background-color: #ebebeb;
   transition: all .2s ease;
+}
+
+header.header img{
+  width: 3.9rem !important;
+  margin-right: 1rem;
 }
 
 header.header--open{
@@ -35,6 +44,6 @@ header.header--base{
   }
 
   header.base li{
-    font-size: .8rem;
+    font-size: 1.1rem;
   }
 }
