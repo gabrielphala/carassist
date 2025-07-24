@@ -22,6 +22,7 @@ export default async (app: Application) => {
         app.use(express.static(path.join(__dirname, '../../../react/dist')));
 
         const routes = [
+            '/terms-and-conditions',
             "/sign-in",
             "/sign-up",
             "/u/requests",
