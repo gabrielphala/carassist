@@ -4,10 +4,11 @@ import "./Home.css"
 export default function App() {
   return (
     <>
-      <header className="flex flex--a-center flex--j-space-between" style={{ position: 'fixed', width: '100%', zIndex: '3', color: '#fafafa', padding: '2rem 6rem' }}>
+      <header className="base flex flex--a-center flex--j-space-between" style={{ position: 'fixed', width: '100%', zIndex: '3', color: '#fafafa', padding: '2rem 6rem' }}>
         <p>CAR <b>ASSIST HUB</b></p>
         <ul className="home-header__links flex">
-          <li className="margin--right-2"><Link to="/sign-in">Driver sign in</Link></li>
+          <li className="margin--right-1"><Link to="/terms-and-conditions">Ts & Cs</Link></li>
+          <li className="margin--right-1"><Link to="/sign-in">Driver sign in</Link></li>
           <li><Link to="/g/sign-in">Garage sign in</Link></li>
         </ul>
       </header>

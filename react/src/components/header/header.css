@@ -33,4 +33,8 @@ header.header--base{
   .header__user{
     font-size: 80%;
   }
+
+  header.base li{
+    font-size: .8rem;
+  }
 }

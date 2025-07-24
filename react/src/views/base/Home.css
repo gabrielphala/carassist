@@ -10,8 +10,6 @@
 .services__list {
   gap: 3rem;
   flex-wrap: wrap;
-
-
 }
 
 .services__list__item {
@@ -57,7 +55,11 @@
     .showcase h1 {
       font-size: 4.5rem !important;
     }
-  
+ 
+    .showcase__caption{
+      left: 2rem !important;
+    }
+    
     header,
     .services {
       padding: 2rem !important;
